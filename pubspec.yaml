@@ -39,6 +39,8 @@ dependencies:
   sqflite: ^2.2.6
   path: ^1.8.2
   synchronized: ^3.0.1
+  google_fonts: ^4.0.3
+  flutter_signin_button: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -63,7 +65,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+    - assets/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
@@ -78,7 +81,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
+    - family: TodoListIcons
+      fonts:
+        - asset: assets/fonts/TodoListIcons.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
