@@ -43,6 +43,7 @@ dependencies:
   flutter_signin_button: ^2.0.0
   firebase_core: ^2.8.0
   firebase_auth: ^4.3.0
+  validatorless: ^1.2.3
 
 dev_dependencies:
   flutter_test:
