@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 50),
                     const TodoListLogo(),
                     Padding(
                       padding: const EdgeInsets.symmetric(
@@ -81,14 +81,14 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const SizedBox(height: 30),
                             SignInButton(
                               Buttons.Google,
-                              text: 'Continue com o Google',
-                              padding: const EdgeInsets.all(4.0),
+                              padding: const EdgeInsets.all(2.0),
                               shape: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
+                                borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide.none,
                               ),
                               onPressed: () {},
@@ -100,16 +100,17 @@ class _LoginPageState extends State<LoginPage> {
                                 const Text('Não tem conta?'),
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).pushNamed('/register');
+                                    Navigator.of(context)
+                                        .pushNamed('/register');
                                   },
                                   child: const Text('Cadastre-se'),
-                                )
+                                ),
                               ],
-                            )
+                            ),
                           ],
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

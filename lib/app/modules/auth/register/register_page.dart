@@ -31,10 +31,6 @@ class RegisterPage extends StatelessWidget {
           children: [
             Text(
               'Todo List',
-              style: TextStyle(fontSize: 10, color: context.primaryColor),
-            ),
-            Text(
-              'Cadastro',
               style: TextStyle(fontSize: 20, color: context.primaryColor),
             ),
           ],
