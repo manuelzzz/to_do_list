@@ -150,6 +150,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  flutter_overlay_loader:
+    dependency: "direct main"
+    description:
+      name: flutter_overlay_loader
+      sha256: d447edb434269e5f639d03018577676e7e4b16ad4d619d028ed464f3a8180984
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   flutter_signin_button:
     dependency: "direct main"
     description:
