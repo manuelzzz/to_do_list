@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_list/app/core/widget/todo_list_field.dart';
 import 'package:todo_list/app/core/widget/todo_list_logo.dart';
+import 'package:todo_list/app/modules/auth/login/login_controller.dart';
+import 'package:validatorless/validatorless.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -11,6 +14,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailEC = TextEditingController();
+  final _passwordEC = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,13 +41,33 @@ class _LoginPageState extends State<LoginPage> {
                         vertical: 20,
                       ),
                       child: Form(
+                        key: _formKey,
                         child: Column(
                           children: [
-                            TodoListField(label: 'E-mail'),
+                            TodoListField(
+                              label: 'E-mail',
+                              controller: _emailEC,
+                              validator: Validatorless.multiple(
+                                [
+                                  Validatorless.required('E-mail obrigatório'),
+                                  Validatorless.email('E-mail inválido'),
+                                ],
+                              ),
+                            ),
                             const SizedBox(height: 20),
                             TodoListField(
                               label: 'Senha',
+                              controller: _passwordEC,
                               obscureText: true,
+                              validator: Validatorless.multiple(
+                                [
+                                  Validatorless.required('Senha obrigatória'),
+                                  Validatorless.min(
+                                    6,
+                                    'A senha deve ter pelo menos 6 caracteres',
+                                  ),
+                                ],
+                              ),
                             ),
                             const SizedBox(height: 10),
                             Row(
@@ -51,7 +78,18 @@ class _LoginPageState extends State<LoginPage> {
                                   child: const Text('Esqueceu sua senha?'),
                                 ),
                                 ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    final formValid =
+                                        _formKey.currentState?.validate() ??
+                                            false;
+
+                                    if (formValid) {
+                                      final email = _emailEC.text;
+                                      final password = _passwordEC.text;
+
+                                      context.read<LoginController>();
+                                    }
+                                  },
                                   style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(15),
