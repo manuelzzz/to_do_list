@@ -69,7 +69,7 @@ class UserRepositoryImpl implements UserRepository {
         print(s);
       }
 
-      if (e.code == 'wrong-password') {
+      if (e.code == 'wrong-password' || e.code == 'user-not-found') {
         throw AuthException(message: 'Login ou senha inválida');
       }
 
@@ -85,10 +85,12 @@ class UserRepositoryImpl implements UserRepository {
 
       if (loginMethods.contains('password')) {
         await _firebaseAuth.sendPasswordResetEmail(email: email);
-      } else {
+      } else if (loginMethods.contains('google')) {
         throw AuthException(
             message:
                 'Cadastro realizado com o google. A senha não pode ser alterada');
+      } else {
+        throw AuthException(message: 'E-mail não cadastrado');
       }
     } on PlatformException catch (e, s) {
       if (kDebugMode) {
