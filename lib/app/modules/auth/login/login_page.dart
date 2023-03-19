@@ -1,6 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_list/app/core/notifier/todo_list_listener_notifier.dart';
+import 'package:todo_list/app/core/ui/messages.dart';
 import 'package:todo_list/app/core/widget/todo_list_field.dart';
 import 'package:todo_list/app/core/widget/todo_list_logo.dart';
 import 'package:todo_list/app/modules/auth/login/login_controller.dart';
@@ -17,6 +20,29 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailEC = TextEditingController();
   final _passwordEC = TextEditingController();
+  final _emailFocus = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    TodoListListenerNotifier(
+      changeNotifier: context.read<LoginController>(),
+    ).listener(
+      context: context,
+      everCallback: (notifier, listenerInstance) {
+        if (notifier is LoginController) {
+          if (notifier.hasInfo) {
+            Messages.of(context).showInfo(notifier.infoMessage!);
+          }
+        }
+      },
+      successCallback: (notifier, listenerInstance) {
+        if (kDebugMode) {
+          print('Login realizado com sucesso');
+        }
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                             TodoListField(
                               label: 'E-mail',
                               controller: _emailEC,
+                              focusNode: _emailFocus,
                               validator: Validatorless.multiple(
                                 [
                                   Validatorless.required('E-mail obrigatório'),
@@ -74,7 +101,18 @@ class _LoginPageState extends State<LoginPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    if (_emailEC.text.isEmpty) {
+                                      _emailFocus.requestFocus();
+                                      Messages.of(context).showError(
+                                        'Digite um E-mail para recuperar a senha',
+                                      );
+                                    } else {
+                                      context
+                                          .read<LoginController>()
+                                          .forgotPassword(_emailEC.text);
+                                    }
+                                  },
                                   child: const Text('Esqueceu sua senha?'),
                                 ),
                                 ElevatedButton(
@@ -87,7 +125,9 @@ class _LoginPageState extends State<LoginPage> {
                                       final email = _emailEC.text;
                                       final password = _passwordEC.text;
 
-                                      context.read<LoginController>();
+                                      context
+                                          .read<LoginController>()
+                                          .login(email, password);
                                     }
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -129,7 +169,9 @@ class _LoginPageState extends State<LoginPage> {
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide.none,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                context.read<LoginController>().googleLogin();
+                              },
                             ),
                             const SizedBox(height: 15),
                             Row(
