@@ -17,10 +17,7 @@ class TodoListListenerNotifier {
   }) {
     changeNotifier.addListener(() {
       if (changeNotifier.loading) {
-        Loader.show(
-          context,
-          progressIndicator: const CircularProgressIndicator(),
-        );
+        Loader.show(context);
       } else {
         Loader.hide();
       }
