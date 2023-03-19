@@ -45,4 +45,28 @@ class UserRepositoryImpl implements UserRepository {
       }
     }
   }
+
+  @override
+  Future<User?> login(String email, String password) async {
+    try {
+      var userCredential = await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      return userCredential.user;
+    } on FirebaseAuthException catch (e, s) {
+      if (kDebugMode) {
+        print(e);
+        print(s);
+      }
+      throw Exception(e.message ?? 'Não foi possível realizar o login');
+    } on AuthException catch (e, s) {
+      if (kDebugMode) {
+        print(e);
+        print(s);
+      }
+      throw Exception();
+    }
+  }
 }
