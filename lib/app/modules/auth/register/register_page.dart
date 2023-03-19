@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_list/app/core/notifier/todo_list_listener_notifier.dart';
 import 'package:todo_list/app/core/ui/theme_extensions.dart';
 import 'package:todo_list/app/core/validators/validators.dart';
 import 'package:todo_list/app/core/widget/todo_list_field.dart';
@@ -24,21 +26,19 @@ class _RegisterPageState extends State<RegisterPage> {
   void initState() {
     super.initState();
     context.read<RegisterController>().addListener(() {
-      final controller = context.read<RegisterController>();
-      var sucesso = controller.sucesso;
-      var erro = controller.erro;
-
-      if (sucesso) {
-        Navigator.of(context).pop();
-      } else if (erro != null && erro.isNotEmpty) {
-        ScaffoldMessenger.of(context).clearSnackBars();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(erro),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
+      final defaultListener = TodoListListenerNotifier(
+          changeNotifier: context.read<RegisterController>());
+      defaultListener.listener(
+        context: context,
+        successCallback: (notifier, listenerInstance) {
+          Navigator.of(context).pop();
+        },
+        // errorCallback: (notifier, listenerInstance) {
+        // if (kDebugMode) {
+        // print('Error');
+        // }
+        // },
+      );
     });
   }
 
