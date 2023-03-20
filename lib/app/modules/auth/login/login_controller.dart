@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:todo_list/app/core/notifier/todo_list_change_notifier.dart';
-import 'package:todo_list/app/core/ui/messages.dart';
 import 'package:todo_list/app/exceptions/auth_exception.dart';
 import 'package:todo_list/app/services/user/user_service.dart';
 

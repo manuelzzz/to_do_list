@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:todo_list/app/modules/auth/auth_module.dart';
 import 'package:todo_list/app/repositories/user/user_repository.dart';
 import '../../exceptions/auth_exception.dart';
 
