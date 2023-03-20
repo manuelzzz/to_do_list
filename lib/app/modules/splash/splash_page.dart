@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list/app/core/widget/todo_list_logo.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(''),
-      ),
+    return const Scaffold(
       body: Center(
-        child: ElevatedButton(
-          onPressed: () => Navigator.of(context).pushNamed('/login'),
-          child: const Text('login'),
-        ),
+        child: TodoListLogo(),
       ),
     );
   }
