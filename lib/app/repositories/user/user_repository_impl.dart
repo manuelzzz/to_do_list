@@ -15,7 +15,7 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<User?> register(String email, String password) async {
     try {
-      var userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+      final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -74,7 +74,9 @@ class UserRepositoryImpl implements UserRepository {
         throw AuthException(message: 'Login ou senha inválida');
       }
 
-      throw AuthException(message: e.message ?? 'Erro ao realizar o login');
+      throw AuthException(
+          message: e.message ??
+              'Erro ao realizar o login, verifique o login e a senha');
     }
   }
 
@@ -116,7 +118,7 @@ class UserRepositoryImpl implements UserRepository {
         if (loginMethods.contains('password')) {
           throw AuthException(
             message:
-                'Você já ultilizou este e-mail para cadastro no TodoList. Caso tenha esuecido sua senha, clique em "Esqueceu sua senha?"',
+                'Você já ultilizou este e-mail para cadastro no TodoList. Caso tenha esquecido sua senha, clique em "Esqueceu sua senha?"',
           );
         } else {
           final googleAuth = await googleUser.authentication;
@@ -130,6 +132,7 @@ class UserRepositoryImpl implements UserRepository {
           return userCredential.user;
         }
       }
+      throw AuthException(message: 'Erro ao fazer login');
     } on FirebaseAuthException catch (e, s) {
       if (kDebugMode) {
         print(e);
@@ -145,5 +148,11 @@ class UserRepositoryImpl implements UserRepository {
         throw AuthException(message: 'Erro ao realizar login');
       }
     }
+  }
+
+  @override
+  Future<void> googleLogout() async {
+    await GoogleSignIn().signOut();
+    _firebaseAuth.signOut();
   }
 }
