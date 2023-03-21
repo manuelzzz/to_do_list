@@ -6,9 +6,34 @@ import 'package:todo_list/app/modules/home/widgets/home_filters.dart';
 import 'package:todo_list/app/modules/home/widgets/home_header.dart';
 import 'package:todo_list/app/modules/home/widgets/home_tasks.dart';
 import 'package:todo_list/app/modules/home/widgets/home_week_filter.dart';
+import 'package:todo_list/app/modules/tasks/task_module.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  void _goToCreateTask(BuildContext context) {
+    // Navigator.of(context).pushNamed('/task/create');
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        transitionDuration: const Duration(milliseconds: 350),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          animation = CurvedAnimation(
+            parent: animation,
+            curve: Curves.easeInQuad,
+          );
+
+          return ScaleTransition(
+            scale: animation,
+            alignment: Alignment.bottomRight,
+            child: child,
+          );
+        },
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return TaskModule().getPage('/task/create', context);
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +59,7 @@ class HomePage extends StatelessWidget {
       drawer: const HomeDrawer(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: context.primaryColor,
-        onPressed: () {},
+        onPressed: () => _goToCreateTask(context),
         child: const Icon(Icons.add),
       ),
       body: LayoutBuilder(
