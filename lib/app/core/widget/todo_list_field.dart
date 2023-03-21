@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list/app/core/ui/theme_extensions.dart';
 import 'package:todo_list/app/core/ui/todo_list_icons.dart';
 
 class TodoListField extends StatelessWidget {
@@ -37,6 +38,10 @@ class TodoListField extends StatelessWidget {
             labelStyle: const TextStyle(
               fontSize: 15,
               color: Colors.black,
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30),
+              borderSide: BorderSide(color: context.primaryColor.withOpacity(.7)),
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),
