@@ -30,7 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
       defaultListener.listener(
         context: context,
         successCallback: (notifier, listenerInstance) {
-          Navigator.of(context).pop();
+          // Navigator.of(context).pop();
         },
         // errorCallback: (notifier, listenerInstance) {
         // if (kDebugMode) {
