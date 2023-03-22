@@ -14,9 +14,8 @@ class TasksServiceImpl implements TasksService {
       _tasksRepository.save(date, description);
 
   @override
-  Future<List<TaskModel>> getToday() {
-    return _tasksRepository.findByPeriod(DateTime.now(), DateTime.now());
-  }
+  Future<List<TaskModel>> getToday() =>
+      _tasksRepository.findByPeriod(DateTime.now(), DateTime.now());
 
   @override
   Future<List<TaskModel>> getTomorrow() {
@@ -31,7 +30,8 @@ class TasksServiceImpl implements TasksService {
     DateTime endFilter;
 
     if (startFilter.weekday != DateTime.monday) {
-      startFilter.subtract(Duration(days: (startFilter.weekday - 1)));
+      startFilter =
+          startFilter.subtract(Duration(days: (startFilter.weekday - 1)));
     }
     endFilter = startFilter.add(const Duration(days: 7));
 
@@ -43,4 +43,11 @@ class TasksServiceImpl implements TasksService {
       tasks: tasks,
     );
   }
+
+  @override
+  Future<void> checkOrUncheckTask(TaskModel task) =>
+      _tasksRepository.checkOrUncheckTask(task);
+
+  @override
+  Future<void> delete(TaskModel task) => _tasksRepository.delete(task);
 }
