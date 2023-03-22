@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_list/app/models/task_model.dart';
+import 'package:todo_list/app/modules/home/home_controller.dart';
 
-class Task extends StatefulWidget {
-  const Task({Key? key}) : super(key: key);
+class Task extends StatelessWidget {
+  final TaskModel model;
+  final dateFormat = DateFormat('dd/MM/y');
 
-  @override
-  State<Task> createState() => _TaskState();
-}
+  Task({
+    Key? key,
+    required this.model,
+  }) : super(key: key);
 
-class _TaskState extends State<Task> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,24 +25,34 @@ class _TaskState extends State<Task> {
         child: ListTile(
           onTap: () {},
           leading: Checkbox(
-            value: true,
-            onChanged: (value) {},
+            value: model.finished,
+            onChanged: (value) {
+              context.read<HomeController>().checkOrUncheckTask(model);
+            },
           ),
-          title: const Text(
-            'Descrição da task',
+          title: Text(
+            model.description,
             style: TextStyle(
-              decoration: true ? TextDecoration.lineThrough : null,
+              decoration: model.finished ? TextDecoration.lineThrough : null,
             ),
           ),
           subtitle: Text(
-            '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}',
-            style: const TextStyle(
-              decoration: true ? TextDecoration.lineThrough : null,
+            dateFormat.format(model.dateTime),
+            style: TextStyle(
+              decoration: model.finished ? TextDecoration.lineThrough : null,
             ),
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
             side: const BorderSide(width: 1),
+          ),
+          trailing: IconButton(
+            icon: const Icon(Icons.delete_outline),
+            onPressed: () {
+              context.read<HomeController>().delete(
+                    task: model,
+                  );
+            },
           ),
         ),
       ),
