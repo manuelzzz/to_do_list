@@ -37,6 +37,10 @@ class TodoListListenerNotifier {
       }
     });
   }
+
+  void dispose() {
+    changeNotifier.dispose();
+  }
 }
 
 typedef SuccessCallback = void Function(
