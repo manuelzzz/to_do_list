@@ -34,7 +34,7 @@ class TasksRepositoryImpl implements TasksRepository {
         select *
         from todo
         where data_hora between ? and ?
-        oder by data_hora
+        order by data_hora
         ''',
       [
         startFilter.toIso8601String(),
@@ -42,5 +42,30 @@ class TasksRepositoryImpl implements TasksRepository {
       ],
     );
     return result.map((e) => TaskModel.loadFromDB(e)).toList();
+  }
+
+  @override
+  Future<void> checkOrUncheckTask(TaskModel task) async {
+    final conn = await _sqliteConnectionFactory.openConnection();
+
+    await conn.rawUpdate(
+      'update todo set finalizado = ? where id = ?',
+      [
+        task.finished,
+        task.id,
+      ],
+    );
+  }
+
+  @override
+  Future<void> delete(TaskModel task) async {
+    final conn = await _sqliteConnectionFactory.openConnection();
+
+    await conn.rawDelete(
+      'delete todo where id = ?',
+      [
+        task.id,
+      ],
+    );
   }
 }
