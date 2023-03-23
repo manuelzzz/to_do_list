@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_list/app/core/auth/auth_provider.dart';
 import 'package:todo_list/app/core/ui/messages.dart';
 import 'package:todo_list/app/core/ui/theme_extensions.dart';
+import 'package:todo_list/app/modules/home/home_controller.dart';
 import 'package:todo_list/app/services/user/user_service.dart';
 
 class HomeDrawer extends StatefulWidget {
@@ -24,7 +25,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
           DrawerHeader(
             decoration: BoxDecoration(
               color: context.primaryColor.withAlpha(70),
-              border:  Border(
+              border: Border(
                 bottom: BorderSide(
                   width: 2,
                   color: Colors.grey.withAlpha(40),
@@ -107,7 +108,10 @@ class _HomeDrawerState extends State<HomeDrawer> {
             title: const Text('Alterar nome'),
           ),
           ListTile(
-            onTap: () => context.read<AuthProvider>().logout(),
+            onTap: () {
+              context.read<HomeController>().clearTable();
+              context.read<AuthProvider>().logout();
+            },
             title: const Text('Sair'),
           ),
         ],

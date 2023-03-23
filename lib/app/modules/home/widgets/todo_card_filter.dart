@@ -56,8 +56,8 @@ class TodoCardFilter extends StatelessWidget {
           children: [
             Text(
               totalTasksModel?.totalTasks == 1
-                  ? '${totalTasksModel?.totalTasks} TASK'
-                  : '${totalTasksModel?.totalTasks ?? 0} TASK\'S',
+                  ? '${totalTasksModel?.totalAvaliableTasks} TASK'
+                  : '${totalTasksModel?.totalAvaliableTasks} TASK\'S',
               style: context.titleStyle.copyWith(
                 fontSize: 10,
                 color: selected ? Colors.white : Colors.grey,
