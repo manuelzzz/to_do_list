@@ -123,8 +123,22 @@ class HomeController extends TodoListChangeNotifier {
   }
 
   Future<void> delete({required TaskModel task}) async {
+    showLoadingAndResetState();
+    notifyListeners();
+
     await _tasksService.delete(task);
 
+    hideLoading();
+    refreshPage();
+  }
+
+  Future<void> clearTable() async {
+    showLoadingAndResetState();
+    notifyListeners();
+
+    await _tasksService.clearTable();
+
+    hideLoading();
     refreshPage();
   }
 }
