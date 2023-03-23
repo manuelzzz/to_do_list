@@ -1,4 +1,4 @@
-# 📄 Todo list
+# 📄 To-do list
 
 A flutter to-do list app, using firebase auth, sqlite, provider and others structures to improve my studies
 
