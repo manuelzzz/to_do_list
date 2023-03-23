@@ -7,7 +7,9 @@ A flutter to-do list app, using firebase auth, sqlite, provider and others struc
 
 ## Getting Started
 
-You need to have installed flutter and git on your machine
+>You need to have installed flutter (with its dependencies) and git on your machine, in that docs you can find how:
+>
+>[Flutter instalation](https://docs.flutter.dev/get-started/install) [git instalation](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
   #### First: clone this repository
 
   ```sh
