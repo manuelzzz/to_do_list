@@ -11,6 +11,7 @@ class SqliteAdmConnection with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     switch (state) {
       case AppLifecycleState.resumed:
+      case AppLifecycleState.hidden:
         break;
       case AppLifecycleState.inactive:
       case AppLifecycleState.paused:

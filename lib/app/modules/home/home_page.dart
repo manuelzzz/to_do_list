@@ -114,10 +114,10 @@ class _HomePageState extends State<HomePage> {
               ),
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
-                child: IntrinsicHeight(
+                child: const IntrinsicHeight(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       HomeHeader(),
                       HomeFilters(),
                       HomeWeekFilter(),
