@@ -13,7 +13,7 @@ A flutter to-do list app, using firebase auth, sqlite, provider and others struc
   #### First: clone this repository
 
   ```sh
-  git clone https://github.com/manuelzzz/to-do-list.git
+  git clone https://github.com/manuelzzz/to_do_list.git
   ```
 
   #### Then, connect your device and run:
