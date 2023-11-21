@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as f;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list/app/app_widget.dart';
@@ -17,7 +17,7 @@ class AppModule extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider(
-          create: (_) => FirebaseAuth.instance,
+          create: (_) => f.FirebaseAuth.instance,
         ),
         Provider(
           create: (_) => SqliteConnectionFactory(),
