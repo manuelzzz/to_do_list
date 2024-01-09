@@ -5,7 +5,7 @@ import 'package:todo_list/app/core/ui/theme_extensions.dart';
 import 'package:todo_list/app/modules/tasks/task_create_controller.dart';
 
 class CalendarButton extends StatefulWidget {
-  const CalendarButton({Key? key}) : super(key: key);
+  const CalendarButton({super.key});
 
   @override
   State<CalendarButton> createState() => _CalendarButtonState();

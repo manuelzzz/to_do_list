@@ -6,7 +6,7 @@ import 'package:todo_list/app/models/task_filter_enum.dart';
 import 'package:todo_list/app/modules/home/home_controller.dart';
 
 class HomeWeekFilter extends StatelessWidget {
-  const HomeWeekFilter({Key? key}) : super(key: key);
+  const HomeWeekFilter({super.key});
 
   @override
   Widget build(BuildContext context) {

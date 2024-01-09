@@ -12,7 +12,7 @@ class TodoListField extends StatelessWidget {
   final FocusNode? focusNode;
 
   TodoListField({
-    Key? key,
+    super.key,
     required this.label,
     this.suffixIconButton,
     this.obscureText = false,
@@ -21,8 +21,7 @@ class TodoListField extends StatelessWidget {
     this.focusNode,
   })  : assert(obscureText == true ? suffixIconButton == null : true,
             "ObscureText can't be send with suffixIconButton"),
-        obscureTextVN = ValueNotifier(obscureText),
-        super(key: key);
+        obscureTextVN = ValueNotifier(obscureText);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +40,8 @@ class TodoListField extends StatelessWidget {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),
-              borderSide: BorderSide(color: context.primaryColor.withOpacity(.7)),
+              borderSide:
+                  BorderSide(color: context.primaryColor.withOpacity(.7)),
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),

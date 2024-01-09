@@ -9,7 +9,7 @@ import 'package:todo_list/app/modules/splash/splash_page.dart';
 import 'package:todo_list/app/modules/tasks/task_module.dart';
 
 class AppWidget extends StatefulWidget {
-  const AppWidget({Key? key}) : super(key: key);
+  const AppWidget({super.key});
 
   @override
   State<AppWidget> createState() => _AppWidgetState();

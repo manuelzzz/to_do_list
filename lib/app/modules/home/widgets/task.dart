@@ -9,9 +9,9 @@ class Task extends StatefulWidget {
   final TaskModel model;
 
   const Task({
-    Key? key,
+    super.key,
     required this.model,
-  }) : super(key: key);
+  });
 
   @override
   State<Task> createState() => _TaskState();

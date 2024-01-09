@@ -10,10 +10,9 @@ class TaskCreatePage extends StatefulWidget {
   final TaskCreateController _controller;
 
   const TaskCreatePage({
-    Key? key,
+    super.key,
     required TaskCreateController controller,
-  })  : _controller = controller,
-        super(key: key);
+  }) : _controller = controller;
 
   @override
   State<TaskCreatePage> createState() => _TaskCreatePageState();

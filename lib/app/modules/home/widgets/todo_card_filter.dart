@@ -12,12 +12,12 @@ class TodoCardFilter extends StatelessWidget {
   final bool selected;
 
   const TodoCardFilter({
-    Key? key,
+    super.key,
     required this.label,
     required this.taskFilter,
     required this.selected,
     this.totalTasksModel,
-  }) : super(key: key);
+  });
 
   double _getPercentFinish() {
     final total = totalTasksModel?.totalTasks ?? .0;

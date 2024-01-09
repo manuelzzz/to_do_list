@@ -8,7 +8,7 @@ import 'package:todo_list/app/modules/home/home_controller.dart';
 import 'package:todo_list/app/services/user/user_service.dart';
 
 class HomeDrawer extends StatefulWidget {
-  const HomeDrawer({Key? key}) : super(key: key);
+  const HomeDrawer({super.key});
 
   @override
   State<HomeDrawer> createState() => _HomeDrawerState();
